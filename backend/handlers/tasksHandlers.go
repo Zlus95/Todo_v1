@@ -1,19 +1,19 @@
 package handlers
 
 import (
-	"backend/models"
+	
 	"context"
 	"encoding/json"
 	"net/http"
 	"time"
-
+	"backend/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 var collection *mongo.Collection
 
-func InitTaskHandlers(c *mongo.Collection) {
+func InitHandlers(c *mongo.Collection) {
 	collection = c
 }
 

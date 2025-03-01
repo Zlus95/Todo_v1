@@ -1,8 +1,12 @@
-module todo-app
+module backend
 
 go 1.24.0
 
-require go.mongodb.org/mongo-driver v1.17.3
+require (
+	github.com/gorilla/mux v1.8.1
+	github.com/rs/cors v1.11.1
+	go.mongodb.org/mongo-driver v1.17.3
+)
 
 require (
 	github.com/golang/snappy v0.0.4 // indirect
