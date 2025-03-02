@@ -1,13 +1,29 @@
 import React, { memo, useRef } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+
+async function createTodo(todo) {
+  const { data } = await axios.post("http://localhost:8080/task", todo);
+  return data;
+}
+
 
 const AddTodo = ({ setTodo }) => {
+  const queryClient = useQueryClient();
   const valueRef = useRef(null);
+
+  const mutation = useMutation({
+    mutationFn: createTodo,
+    onSuccess: () => queryClient.invalidateQueries(["todoList"]),
+  });
 
   const handlerSubmit = (event) => {
     event.preventDefault();
-    const value = valueRef.current.value;
-    setTodo((prev) => [...prev, value]);
-    valueRef.current.value = "";
+    if (valueRef.current) {
+      const value = valueRef.current.value;
+      mutation.mutate({ title: value, done: false });
+      valueRef.current.value = "";
+    }
   };
 
   return (
