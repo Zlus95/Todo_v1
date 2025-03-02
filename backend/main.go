@@ -29,7 +29,7 @@ func main() {
 	r.HandleFunc("/tasks", handlers.GetTasks).Methods("GET")
 	r.HandleFunc("/task", handlers.CreateTask).Methods("POST")
 	r.HandleFunc("/tasks/{id}", handlers.UpdateTask).Methods("PATCH")
-	// r.HandleFunc("/tasks/{id}", handlers.DeleteTask).Methods("DELETE")
+	r.HandleFunc("/tasks/{id}", handlers.DeleteTask).Methods("DELETE")
 
 	// Настройка CORS
 	c := cors.New(cors.Options{

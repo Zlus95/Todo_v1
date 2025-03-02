@@ -52,3 +52,12 @@ func UpdateTask(w http.ResponseWriter, r *http.Request) {
 	collection.UpdateOne(ctx, bson.M{"_id": id}, bson.M{"$set": task})
 	json.NewEncoder(w).Encode(task)
 }
+
+func DeleteTask(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, _ := primitive.ObjectIDFromHex(params["id"])
+	ctx, cancel := context.WithTimeout(r.Context(), 10*time.Second)
+	defer cancel()
+	collection.DeleteOne(ctx, bson.M{"_id": id})
+	w.WriteHeader(http.StatusNoContent)
+}

@@ -33,3 +33,7 @@
 .StatusDoing {
     @apply text-white
 }
+
+.DeleteButton {
+    @apply text-red-500 text-base
+}

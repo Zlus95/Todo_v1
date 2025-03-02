@@ -31,7 +31,7 @@ const TodoPage = () => {
 
   if (isError) {
     return (
-      <div className="Сontainer text-primary text-2xl">
+      <div className="Сontainer text-red-500 text-2xl">
         Error: {error.message}
       </div>
     );
