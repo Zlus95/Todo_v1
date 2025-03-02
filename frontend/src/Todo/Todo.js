@@ -1,11 +1,11 @@
 import React, { memo, useCallback } from "react";
 import "./style.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import api from "../api";
 
 async function updateStatus(id, todo) {
   const task = await todo.find((item) => item.id === id);
-  const { data } = await axios.patch(`http://localhost:8080/tasks/${id}`, {
+  const { data } = await api.patch(`/tasks/${id}`, {
     ...task,
     done: !task.done,
   });
@@ -13,7 +13,7 @@ async function updateStatus(id, todo) {
 }
 
 async function deleteTask(id) {
-  const { data } = await axios.delete(`http://localhost:8080/tasks/${id}`);
+  const { data } = await api.delete(`/tasks/${id}`);
   return data;
 }
 

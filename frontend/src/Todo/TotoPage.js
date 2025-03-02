@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import AddTodo from "./AddTodo";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import Todo from "./Todo";
+import api from "../api";
 
 function useGetTodos() {
   return useQuery({
     queryKey: ["todoList"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:8080/tasks");
+      const response = await api.get("/tasks");
       return response;
     },
   });
