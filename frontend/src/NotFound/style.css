@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.Сontainer {
+    @apply flex justify-center items-center h-full flex-col gap-4;
+}
+
+.Text {
+    @apply text-white/50 text-2xl
+}
+
+.Button {
+    @apply text-white text-xl;
+}
