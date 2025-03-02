@@ -7,8 +7,7 @@ async function createTodo(todo) {
   return data;
 }
 
-
-const AddTodo = ({ setTodo }) => {
+const AddTodo = () => {
   const queryClient = useQueryClient();
   const valueRef = useRef(null);
 
@@ -28,7 +27,11 @@ const AddTodo = ({ setTodo }) => {
 
   return (
     <form onSubmit={handlerSubmit} className="FormСontainer">
-      <input type="text" ref={valueRef} id="todo" />
+      <input
+        type="text"
+        ref={valueRef}
+        id="todo"
+      />
       <button className="AddButton">+</button>
     </form>
   );

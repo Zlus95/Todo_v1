@@ -3,6 +3,7 @@ import "./style.css";
 import AddTodo from "./AddTodo";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import Todo from "./Todo";
 
 function useGetTodos() {
   return useQuery({
@@ -32,11 +33,15 @@ const TodoPage = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  console.log(todo.data);
   return (
     isSuccess && (
       <div className="Сontainer">
-        <AddTodo setTodo={setTodo} />
+        <AddTodo />
+        {(todo.data || []).map(({ title, id }) => (
+          <div key={id} className="TodoContainer">
+            <Todo title={title} />
+          </div>
+        ))}
       </div>
     )
   );

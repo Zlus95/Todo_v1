@@ -7,9 +7,21 @@
 }
 
 .FormСontainer {
-    @apply flex gap-2
+    @apply flex gap-2 w-64 justify-between;
+
+   input {
+    @apply rounded;
+   }
 }
 
 .AddButton {
     @apply border-2 rounded px-2 text-primary text-xl border-primary
+}
+
+.TodoContainer {
+    @apply w-64 border-2 border-orange-300 flex justify-between p-2 rounded;
+}
+
+.TodoButtons {
+    @apply flex gap-2
 }
