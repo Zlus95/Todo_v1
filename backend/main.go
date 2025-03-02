@@ -19,17 +19,21 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	collection := client.Database("todolist").Collection("tasks")
+	tasksCollection := client.Database("todolist").Collection("tasks")
+	userCollection := client.Database("todolist").Collection("users")
 
 	// Инициализация маршрутизатора
 	r := mux.NewRouter()
-	handlers.InitHandlers(collection)
+	handlers.InitHandlers(tasksCollection)
+	handlers.InitAuthHandlers(userCollection)
 
 	// Маршруты
 	r.HandleFunc("/tasks", handlers.GetTasks).Methods("GET")
 	r.HandleFunc("/task", handlers.CreateTask).Methods("POST")
 	r.HandleFunc("/tasks/{id}", handlers.UpdateTask).Methods("PATCH")
 	r.HandleFunc("/tasks/{id}", handlers.DeleteTask).Methods("DELETE")
+	r.HandleFunc("/register", handlers.Register).Methods("POST")
+	r.HandleFunc("/login", handlers.Login).Methods("POST")
 
 	// Настройка CORS
 	c := cors.New(cors.Options{
