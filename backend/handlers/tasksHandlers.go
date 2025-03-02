@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -38,5 +39,16 @@ func CreateTask(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(r.Context(), 10*time.Second)
 	defer cancel()
 	collection.InsertOne(ctx, task)
-	json.NewEncoder(w).Encode(task);
+	json.NewEncoder(w).Encode(task)
+}
+
+func UpdateTask(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, _ := primitive.ObjectIDFromHex(params["id"])
+	var task models.Task
+	json.NewDecoder(r.Body).Decode(&task)
+	ctx, cancel := context.WithTimeout(r.Context(), 10*time.Second)
+	defer cancel()
+	collection.UpdateOne(ctx, bson.M{"_id": id}, bson.M{"$set": task})
+	json.NewEncoder(w).Encode(task)
 }

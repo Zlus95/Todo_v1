@@ -30,16 +30,20 @@ const TodoPage = () => {
   }
 
   if (isError) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div className="Сontainer text-primary text-2xl">
+        Error: {error.message}
+      </div>
+    );
   }
 
   return (
     isSuccess && (
       <div className="Сontainer">
         <AddTodo />
-        {(todo.data || []).map(({ title, id }) => (
-          <div key={id} className="TodoContainer">
-            <Todo title={title} />
+        {(todo.data || []).map((item) => (
+          <div key={item.id} className="TodoContainer">
+            <Todo todo={todo} {...item} />
           </div>
         ))}
       </div>

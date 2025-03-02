@@ -25,3 +25,11 @@
 .TodoButtons {
     @apply flex gap-2
 }
+
+.StatusDone {
+    @apply text-white/50 text-lg
+}
+
+.StatusDoing {
+    @apply text-white
+}
