@@ -4,6 +4,7 @@
 
 .Сontainer {
     @apply flex justify-center items-center h-full flex-col gap-4;
+
 }
 
 .Text {
