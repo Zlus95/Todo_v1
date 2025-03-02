@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.Сontainer {
+    @apply flex justify-center items-center h-full;
+}
+
+.FormСontainer {
+    @apply flex gap-2
+}
+
+.AddButton {
+    @apply border-2 rounded px-2 text-primary text-xl border-primary
+}
