@@ -11,5 +11,5 @@
 }
 
 .Button {
-    @apply text-white text-xl;
+    @apply text-primary text-xl;
 }
