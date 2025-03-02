@@ -27,7 +27,12 @@ const Todo = (props) => {
   });
 
   const update = useCallback(async () => {
-    await mutationUpdate.mutateAsync(id);
+    try {
+      await mutationUpdate.mutateAsync(id);
+    } catch (error) {
+      console.error("error", error);
+      alert("Failed to update task status. Please try again");
+    }
   }, [id, mutationUpdate]);
 
   const mutationDelete = useMutation({
@@ -36,7 +41,12 @@ const Todo = (props) => {
   });
 
   const deleteCallBack = useCallback(async () => {
-    await mutationDelete.mutateAsync(id);
+    try {
+      await mutationDelete.mutateAsync(id);
+    } catch (error) {
+      console.error("error", error);
+      alert("Failed to delete task Please try again");
+    }
   }, [id, mutationDelete]);
 
   return (
