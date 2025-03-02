@@ -1,7 +1,8 @@
 import "./main.css";
+import Navigation from "./Navigation/Navigation";
 
 function App() {
-  return <div class="text-red-500 p-4">Привет!</div>;
+  return <Navigation />;
 }
 
 export default App;
