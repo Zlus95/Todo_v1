@@ -13,7 +13,7 @@ A simple Tudu sheet application with authorization and registration
 
 ### Frontend
 
-1) React
+1) ReactJS
 2) react-query
 3) tailwindcss
 4) axios
