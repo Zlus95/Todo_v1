@@ -1,4 +1,4 @@
-import React, { memo, useRef } from "react";
+import React, { memo, useRef, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../api";
 
@@ -10,6 +10,12 @@ async function createTodo(todo) {
 const AddTodo = () => {
   const queryClient = useQueryClient();
   const valueRef = useRef(null);
+  const [validForm, setValid] = useState(false);
+
+  const changeInput = () => {
+    const value = valueRef.current.value;
+    setValid(value.trim() !== "");
+  };
 
   const mutation = useMutation({
     mutationFn: createTodo,
@@ -27,12 +33,13 @@ const AddTodo = () => {
 
   return (
     <form onSubmit={handlerSubmit} className="FormСontainer">
-      <input
-        type="text"
-        ref={valueRef}
-        id="todo"
-      />
-      <button className="AddButton">+</button>
+      <input type="text" onChange={changeInput} ref={valueRef} id="todo" />
+      <button
+        disabled={!validForm}
+        className={validForm ? "AddButton" : "AddButton opacity-50"}
+      >
+        +
+      </button>
     </form>
   );
 };
