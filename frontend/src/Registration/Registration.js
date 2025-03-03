@@ -32,6 +32,7 @@ const Registration = () => {
   const mutationReg = useMutation({
     mutationFn: registration,
     onSuccess: () => navigate("/login"),
+    onError: ({ response }) => alert(response.data),
   });
 
   const handlerSubmit = (event) => {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 import AddTodo from "./AddTodo";
 import { useQuery } from "@tanstack/react-query";
@@ -16,6 +17,7 @@ function useGetTodos() {
 }
 
 const TodoPage = () => {
+  const navigate = useNavigate();
   const [todo, setTodo] = useState([]);
   const { isLoading, data, error, isError, isSuccess } = useGetTodos();
 
@@ -39,13 +41,24 @@ const TodoPage = () => {
 
   return (
     isSuccess && (
-      <div className="Сontainer">
-        <AddTodo />
-        {(todo.data || []).map((item) => (
-          <div key={item.id} className="TodoContainer">
-            <Todo todo={todo} {...item} />
-          </div>
-        ))}
+      <div>
+        <div
+          className="LogOut"
+          onClick={() => {
+            navigate("/login");
+            localStorage.removeItem("token");
+          }}
+        >
+          Log out
+        </div>
+        <div className="Сontainer">
+          <AddTodo />
+          {(todo.data || []).map((item) => (
+            <div key={item.id} className="TodoContainer">
+              <Todo todo={todo} {...item} />
+            </div>
+          ))}
+        </div>
       </div>
     )
   );

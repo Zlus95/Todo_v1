@@ -37,3 +37,7 @@
 .DeleteButton {
     @apply text-red-500 text-base
 }
+
+.LogOut {
+    @apply flex justify-end p-4 text-primary cursor-pointer;
+}

@@ -25,6 +25,7 @@ const Auth = () => {
   const mutationLogin = useMutation({
     mutationFn: login,
     onSuccess: () => navigate("/tasks"),
+    onError: ({ response }) => alert(response.data),
   });
 
   const handlerSubmit = (event) => {
