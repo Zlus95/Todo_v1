@@ -1,5 +1,12 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import api from "../api";
+
+async function registration(user) {
+  const { data } = await api.post("/register", user);
+  return data;
+}
 
 const Registration = () => {
   const emailRef = useRef(null);
@@ -21,48 +28,73 @@ const Registration = () => {
     );
   };
 
+  const mutationReg = useMutation({
+    mutationFn: registration,
+  });
+
+  const handlerSubmit = (event) => {
+    event.preventDefault();
+    if (
+      emailRef.current &&
+      passwordRef.current &&
+      nameRef.current &&
+      lastNameRef.current
+    ) {
+      const email = emailRef.current.value;
+      const password = passwordRef.current.value;
+      const name = nameRef.current.value;
+      const lastName = lastNameRef.current.value;
+      mutationReg.mutate({ email, password, name, lastName });
+    }
+  };
+
+  const inputFields = [
+    {
+      id: "Name",
+      label: "Name:",
+      placeholder: "Name",
+      ref: nameRef,
+    },
+    {
+      id: "Last Name",
+      label: "Last Name:",
+      placeholder: "Last Name",
+      ref: lastNameRef,
+    },
+    {
+      id: "email",
+      label: "Email:",
+      placeholder: "login",
+      ref: emailRef,
+    },
+    {
+      id: "password",
+      label: "Password:",
+      placeholder: "password",
+      type: "password",
+      ref: passwordRef,
+    },
+  ];
+
   return (
-    <form className="Сontainer">
+    <form className="Сontainer" onSubmit={handlerSubmit}>
       <div className="h-96 СontainerDiv">
         <p className="Title">Todo List</p>
         <div className="СontainerInput gap-2">
-          <label htmlFor="Name" className="TextStyle">
-            Name:
-          </label>
-          <input
-            placeholder="Name"
-            id="Name"
-            onChange={changeInput}
-            ref={nameRef}
-          />
-          <label htmlFor="Last Name" className="TextStyle">
-            Last Name:
-          </label>
-          <input
-            placeholder="Last Name"
-            id="Last Name"
-            onChange={changeInput}
-            ref={lastNameRef}
-          />
-          <label htmlFor="email" className="TextStyle">
-            Email:
-          </label>
-          <input
-            placeholder="login"
-            id="email"
-            onChange={changeInput}
-            ref={emailRef}
-          />
-          <label htmlFor="password" className="TextStyle">
-            Password:
-          </label>
-          <input
-            placeholder="password"
-            type="password"
-            id="password"
-            ref={passwordRef}
-            onChange={changeInput}
-          />
+          {inputFields.map((field) => (
+            <React.Fragment key={field.id}>
+              <label htmlFor={field.id} className="TextStyle">
+                {field.label}
+              </label>
+              <input
+                placeholder={field.placeholder}
+                id={field.id}
+                onChange={changeInput}
+                ref={field.ref}
+                type={field.type || "text"}
+              />
+            </React.Fragment>
+          ))}
         </div>
 
         <div className="SignIn">

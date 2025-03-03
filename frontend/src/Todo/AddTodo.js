@@ -1,9 +1,9 @@
 import React, { memo, useRef } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import api from "../api";
 
 async function createTodo(todo) {
-  const { data } = await axios.post("http://localhost:8080/task", todo);
+  const { data } = await api.post("/task", todo);
   return data;
 }
 
