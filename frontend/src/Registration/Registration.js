@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import "./style.css";
+// import "./style.css";
 
-const Auth = () => {
+const Registration = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [validForm, setValid] = useState(false);
@@ -15,9 +15,27 @@ const Auth = () => {
 
   return (
     <form className="Сontainer">
-      <div className="СontainerDiv h-72">
+      <div className="h-96 СontainerDiv">
         <p className="Title">Todo List</p>
-        <div className="СontainerInput gap-4">
+        <div className="СontainerInput gap-2">
+          <label htmlFor="Name" className="TextStyle">
+            Name:
+          </label>
+          <input
+            placeholder="Name"
+            id="Name"
+            onChange={changeInput}
+            ref={emailRef}
+          />
+          <label htmlFor="Last Name" className="TextStyle">
+            Last Name:
+          </label>
+          <input
+            placeholder="Last Name"
+            id="Last Name"
+            onChange={changeInput}
+            ref={emailRef}
+          />
           <label htmlFor="email" className="TextStyle">
             Email:
           </label>
@@ -44,13 +62,13 @@ const Auth = () => {
             className={validForm ? "text-primary" : "text-primary/50"}
             disabled={!validForm}
           >
-            Sign in
+            Sign up
           </button>
         </div>
         <div className="SignUp">
-          <p className="TextStyle">Don't have an account?</p>
-          <Link to="/register" className="text-primary">
-            Sign up
+          <p className="TextStyle">Already have an account?</p>
+          <Link to="/login" className="text-primary">
+            Sign in
           </Link>
         </div>
       </div>
@@ -58,4 +76,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default Registration;

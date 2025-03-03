@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .СontainerDiv {
-    @apply h-72 w-80 border rounded border-orange-400
+    @apply w-80 border rounded border-orange-400
 }
 
 .Title {
@@ -11,7 +11,7 @@
 }
 
 .СontainerInput {
-    @apply flex justify-center flex-col p-4 gap-4;
+    @apply flex justify-center flex-col p-4;
 
     input {
         @apply rounded;
