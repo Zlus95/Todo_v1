@@ -1,16 +1,24 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-// import "./style.css";
 
 const Registration = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const nameRef = useRef(null);
+  const lastNameRef = useRef(null);
   const [validForm, setValid] = useState(false);
 
   const changeInput = () => {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    setValid(email.trim() !== "" && password.trim() !== "");
+    const name = nameRef.current.value;
+    const lastName = lastNameRef.current.value;
+    setValid(
+      email.trim() !== "" &&
+        password.trim() !== "" &&
+        name.trim() !== "" &&
+        lastName.trim() !== ""
+    );
   };
 
   return (
@@ -25,7 +33,7 @@ const Registration = () => {
             placeholder="Name"
             id="Name"
             onChange={changeInput}
-            ref={emailRef}
+            ref={nameRef}
           />
           <label htmlFor="Last Name" className="TextStyle">
             Last Name:
@@ -34,7 +42,7 @@ const Registration = () => {
             placeholder="Last Name"
             id="Last Name"
             onChange={changeInput}
-            ref={emailRef}
+            ref={lastNameRef}
           />
           <label htmlFor="email" className="TextStyle">
             Email:

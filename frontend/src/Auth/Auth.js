@@ -38,7 +38,6 @@ const Auth = () => {
             onChange={changeInput}
           />
         </div>
-
         <div className="SignIn">
           <button
             className={validForm ? "text-primary" : "text-primary/50"}
