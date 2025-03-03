@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-.Сontainer {
-    @apply flex justify-center items-center h-full;
+.СontainerDiv {
+    @apply h-72 w-80 border rounded border-orange-400
+}
+
+.Title {
+    @apply flex justify-center text-primary text-2xl;
+}
+
+.СontainerInput {
+    @apply flex justify-center flex-col p-4 gap-4;
+
+    input {
+        @apply rounded;
+    }
+}
+
+.TextStyle {
+    @apply text-white/50
+}
+
+.SignIn {
+    @apply flex justify-center gap-4 pb-2;
+}
+
+.SignUp {
+    @apply flex justify-center gap-2;
 }

@@ -15,10 +15,10 @@ const Auth = () => {
 
   return (
     <form className="Сontainer">
-      <div className="h-72 w-80 border rounded border-orange-400">
-        <p className="flex justify-center text-primary text-2xl">Todo List</p>
-        <div className="flex justify-center flex-col p-4 gap-4">
-          <label htmlFor="email" className="text-white/50">
+      <div className="СontainerDiv">
+        <p className="Title">Todo List</p>
+        <div className="СontainerInput">
+          <label htmlFor="email" className="TextStyle">
             Email:
           </label>
           <input
@@ -27,7 +27,7 @@ const Auth = () => {
             onChange={changeInput}
             ref={emailRef}
           />
-          <label htmlFor="password" className="text-white/50">
+          <label htmlFor="password" className="TextStyle">
             Password:
           </label>
           <input
@@ -39,16 +39,16 @@ const Auth = () => {
           />
         </div>
 
-        <div className="flex justify-center gap-4 pb-2">
+        <div className="SignIn">
           <button
             className={validForm ? "text-primary" : "text-primary/50"}
             disabled={!validForm}
           >
-            sign in
+            Sign in
           </button>
         </div>
-        <div className="flex justify-center gap-2">
-          <p className="text-white/50">Don't have an account?</p>
+        <div className="SignUp">
+          <p className="TextStyle">Don't have an account?</p>
           <Link to="/register" className="text-primary">
             Sign up
           </Link>
