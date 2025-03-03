@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import api from "../api";
 
@@ -9,6 +9,7 @@ async function registration(user) {
 }
 
 const Registration = () => {
+  const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const nameRef = useRef(null);
@@ -30,6 +31,7 @@ const Registration = () => {
 
   const mutationReg = useMutation({
     mutationFn: registration,
+    onSuccess: () => navigate("/login"),
   });
 
   const handlerSubmit = (event) => {
