@@ -1,8 +1,17 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 import "./style.css";
+import api from "../api";
+
+async function login(user) {
+  const { data } = await api.post("/login", user);
+  localStorage.setItem("token", data.token);
+  return data;
+}
 
 const Auth = () => {
+  const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [validForm, setValid] = useState(false);
@@ -13,8 +22,22 @@ const Auth = () => {
     setValid(email.trim() !== "" && password.trim() !== "");
   };
 
+  const mutationLogin = useMutation({
+    mutationFn: login,
+    onSuccess: () => navigate("/tasks"),
+  });
+
+  const handlerSubmit = (event) => {
+    event.preventDefault();
+    if (emailRef.current && passwordRef.current) {
+      const email = emailRef.current.value;
+      const password = passwordRef.current.value;
+      mutationLogin.mutate({ email, password });
+    }
+  };
+
   return (
-    <form className="Сontainer">
+    <form className="Сontainer" onSubmit={handlerSubmit}>
       <div className="СontainerDiv h-72">
         <p className="Title">Todo List</p>
         <div className="СontainerInput gap-4">

@@ -18,7 +18,7 @@ func AuthMiddleware(next http.Handler) http.Handler {
 
 		tokenString = strings.Split(tokenString, "Bearer ")[1]
 		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-			return []byte("your-secret-key"), nil
+			return []byte("top-secret"), nil
 		})
 
 		if err != nil || !token.Valid {
@@ -26,7 +26,6 @@ func AuthMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		// Добавляем user_id в контекст запроса
 		claims := token.Claims.(jwt.MapClaims)
 		userID := claims["user_id"].(string)
 		ctx := context.WithValue(r.Context(), "user_id", userID)

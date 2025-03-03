@@ -24,24 +24,27 @@ func main() {
 
 	// Инициализация маршрутизатора
 	r := mux.NewRouter()
-	handlers.InitHandlers(tasksCollection)
+	handlers.InitTaskHandlers(tasksCollection)
 	handlers.InitAuthHandlers(userCollection)
 
 	// Маршруты
-	r.HandleFunc("/tasks", handlers.GetTasks).Methods("GET")
-	r.HandleFunc("/task", handlers.CreateTask).Methods("POST")
-	r.HandleFunc("/tasks/{id}", handlers.UpdateTask).Methods("PATCH")
-	r.HandleFunc("/tasks/{id}", handlers.DeleteTask).Methods("DELETE")
+	// r.HandleFunc("/tasks", handlers.GetTasks).Methods("GET")
+	r.Handle("/tasks", handlers.AuthMiddleware(http.HandlerFunc(handlers.GetTasks))).Methods("GET")
+	// r.HandleFunc("/task", handlers.CreateTask).Methods("POST")
+	r.Handle("/task", handlers.AuthMiddleware(http.HandlerFunc(handlers.CreateTask))).Methods("POST")
+	// r.HandleFunc("/tasks/{id}", handlers.UpdateTask).Methods("PATCH")
+	r.Handle("/tasks/{id}", handlers.AuthMiddleware(http.HandlerFunc(handlers.UpdateTask))).Methods("PATCH")
+	// r.HandleFunc("/tasks/{id}", handlers.DeleteTask).Methods("DELETE")
+	r.Handle("/tasks/{id}", handlers.AuthMiddleware(http.HandlerFunc(handlers.DeleteTask))).Methods("DELETE")
 	r.HandleFunc("/register", handlers.Register).Methods("POST")
 	r.HandleFunc("/login", handlers.Login).Methods("POST")
 
 	// Настройка CORS
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000"}, // Разрешенный origin (ваш фронтенд)
+		AllowedOrigins:   []string{"http://localhost:3000"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"},
 		AllowedHeaders:   []string{"Content-Type", "Authorization"},
 		AllowCredentials: true,
-		Debug:            true, // Включите для отладки CORS
 	})
 
 	// Оберните маршрутизатор в CORS
